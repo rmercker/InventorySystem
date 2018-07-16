@@ -130,7 +130,7 @@ public class Window extends JFrame{
         constraints.gridy = 0;
         constraints.gridwidth = 1;
         constraints.gridheight = 2;
-        constraints.weightx = 0.33f;
+        constraints.weightx = 1f;
         constraints.weighty = 1f;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
 
@@ -166,12 +166,17 @@ public class Window extends JFrame{
         fl.setAlignment(FlowLayout.LEFT);
 
         MaterialPanel mp0 = new MaterialPanel(new Materials ("male0", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, scrollPanelView.getWidth(), scrollPanelView.getHeight());
+        mp0.setPreferredSize(new Dimension(480, getHeight() / 6));
         MaterialPanel mp1 = new MaterialPanel(new Materials ("male1", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, scrollPanelView.getWidth(), scrollPanelView.getHeight());
+        mp1.setPreferredSize(new Dimension(480, getHeight() / 6));
         MaterialPanel mp2 = new MaterialPanel(new Materials ("male2", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, scrollPanelView.getWidth(), scrollPanelView.getHeight());
+        mp2.setPreferredSize(new Dimension(480, getHeight() / 6));
         MaterialPanel mp3 = new MaterialPanel(new Materials ("male3", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, scrollPanelView.getWidth(), scrollPanelView.getHeight());
+        mp3.setPreferredSize(new Dimension(480, getHeight() / 6));
         MaterialPanel mp4 = new MaterialPanel(new Materials ("male4", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, scrollPanelView.getWidth(), scrollPanelView.getHeight());
+        mp4.setPreferredSize(new Dimension(480, getHeight() / 6));
         MaterialPanel mp5 = new MaterialPanel(new Materials ("male4", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, scrollPanelView.getWidth(), scrollPanelView.getHeight());
-
+        mp5.setPreferredSize(new Dimension(480, getHeight() / 6));
 /*
         GridBagConstraints c = new GridBagConstraints();
 

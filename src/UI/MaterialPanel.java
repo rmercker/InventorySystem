@@ -38,7 +38,7 @@ public class MaterialPanel extends ItemPanel {
         c.gridy = y;
         c.gridwidth = width;
         c.gridheight = height;
-        c.anchor = GridBagConstraints.LINE_START;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.fill = GridBagConstraints.HORIZONTAL;
 
         add (itemType, c);
@@ -54,7 +54,7 @@ public class MaterialPanel extends ItemPanel {
         c.gridy = y;
         c.gridwidth = width;
         c.gridheight = height;
-        c.anchor = GridBagConstraints.LINE_START;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.fill = GridBagConstraints.HORIZONTAL;
 
         add (itemSupplier, c);

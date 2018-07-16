@@ -35,14 +35,13 @@ public abstract class ItemPanel extends JPanel {
         c.gridwidth = 5;
         c.gridheight = 5;
         c.fill = GridBagConstraints.BOTH;
-        c.anchor = GridBagConstraints.LINE_START;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
 
         File file = new File (imageURL);
         BufferedImage image;
         JLabel imageLabel = new JLabel();
 
         int scaleFactor = small ? smallImageFactor : largeImageFactor;
-        imageLabel.setBounds(0, 0, width, scaleFactor);
 
         if (file.exists()) {
             try {
