@@ -15,16 +15,16 @@ public abstract class ItemPanel extends JPanel {
 
     // TODO: add proper setting to make a viable panel;
     private final String defaultImageURL = "resources/defaultImage.png";
-    private final int smallImageFactor = 100, largeImageFactor = 100;
+    private final int smallImageFactor = 100, largeImageFactor = 250;
 
-    protected ItemPanel (String imageURL, String description, boolean small, int width, int height) {
+    protected ItemPanel (String imageURL, String description, boolean small) {
         setLayout(new GridBagLayout ());
         setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        initContent (imageURL, small, width, height, description);
+        initContent (imageURL, small, description);
         setVisible(true);
     }
 
-    private void initContent (String imageURL, boolean small, int width, int height, String description) {
+    private void initContent (String imageURL, boolean small, String description) {
 
         GridBagConstraints c = new GridBagConstraints();
 
@@ -37,7 +37,7 @@ public abstract class ItemPanel extends JPanel {
         c.weightx = 1f;
         c.weighty = 1f;
         c.fill = GridBagConstraints.BOTH;
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.anchor = GridBagConstraints.NORTHWEST;
 
         File file = new File (imageURL);
         BufferedImage image;

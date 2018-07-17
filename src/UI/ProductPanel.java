@@ -11,8 +11,8 @@ public class ProductPanel extends ItemPanel {
 
     private Products product;
 
-    public ProductPanel(Products product, boolean small, int width, int height) {
-        super (product.getImageURL (), product.getDescription (), small, width, height);
+    public ProductPanel(Products product, boolean small) {
+        super (product.getImageURL (), product.getDescription (), small);
         this.product = product;
     }
 }

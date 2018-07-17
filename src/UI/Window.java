@@ -4,8 +4,6 @@ import Items.Materials;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 /**
  * Created by dontf on 6/24/2018.
@@ -27,6 +25,7 @@ public class Window extends JFrame{
         setSize(width, height);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Inventory");
+        setResizable(true);
         setVisible(true);
     }
 
@@ -96,124 +95,53 @@ public class Window extends JFrame{
 
     // TODO: add all necessary panes!
     private void initSections (Container desktop) {
+        desktop.setLayout(new GridBagLayout());
+
+        setUpMultiItemPanel (desktop);
+        setUpSingleItemPanel (desktop);
+        setUpOptionsPanel (desktop);
+    }
+
+    private void setUpMultiItemPanel (Container desktop) {
         JScrollPane multiItemsPanel = new JScrollPane();
         JPanel scrollPanelView = new JPanel();
         scrollPanelView.setVisible(true);
         multiItemsPanel.setVisible(true);
-        multiItemsPanel.setPreferredSize(new Dimension(512, getMaximumSize().height));
+        multiItemsPanel.setWheelScrollingEnabled(true);
         multiItemsPanel.setViewportView(scrollPanelView);
-        multiItemsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        multiItemsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         multiItemsPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-        JList<ItemPanel> singleItemPanel = new JList<>();
-        JPanel optionPanel = new JPanel();
-        //testing grid bag layout
-        JPanel multiItemTestPanel = new JPanel();
-        JPanel singleItemTestPanel = new JPanel();
-
-        GridBagLayout overallLayout = new GridBagLayout();
-
-        desktop.setLayout(overallLayout);
         GridBagConstraints constraints = new GridBagConstraints();
-
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        constraints.gridwidth = 2;
-        constraints.gridheight = 1;
-        constraints.weightx = 0.66f;
-        constraints.weighty = 0.33f;
-        constraints.anchor = GridBagConstraints.LAST_LINE_END;
-
-        overallLayout.setConstraints(optionPanel, constraints);
-        desktop.add(optionPanel);
 
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 1;
         constraints.gridheight = 2;
-        constraints.weightx = 1f;
+        constraints.weightx = 0.33f;
         constraints.weighty = 1f;
-        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
 
-        overallLayout.setConstraints(multiItemsPanel, constraints);
-        desktop.add(multiItemsPanel);
-
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        constraints.gridwidth = 2;
-        constraints.gridheight = 1;
-        constraints.weightx = 0.66f;
-        constraints.weighty = 0.66f;
-        constraints.anchor = GridBagConstraints.FIRST_LINE_END;
-
-        overallLayout.setConstraints(singleItemTestPanel, constraints);
-        desktop.add(singleItemTestPanel);
-
-        //multiItemsPanel.setVisible(true);
-        singleItemPanel.setVisible(true);
-        optionPanel.setVisible(true);
-        multiItemTestPanel.setVisible(true);
-        singleItemTestPanel.setVisible(true);
-
-        optionPanel.add(new JButton("option"));
-        // multiItemsPanel.add(new JButton("list"));
-    //    scrollPanelView.add(new JLabel ("hello1"));
-    //    scrollPanelView.add(new JLabel ("hello2"));
-    //    scrollPanelView.add(new JLabel ("hello3"));
+        desktop.add(multiItemsPanel, constraints);
 
         scrollPanelView.setLayout(new GridLayout(0, 1));
-        //scrollPanelView.setPreferredSize(new Dimension(512, getHeight()));
 
-        MaterialPanel mp0 = new MaterialPanel(new Materials ("male0", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, multiItemsPanel.getWidth(), multiItemsPanel.getHeight());
-        mp0.setPreferredSize(new Dimension(480, getHeight() / 6));
-        MaterialPanel mp1 = new MaterialPanel(new Materials ("male1", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, multiItemsPanel.getWidth(), multiItemsPanel.getHeight());
-        mp1.setPreferredSize(new Dimension(480, getHeight() / 6));
-        MaterialPanel mp2 = new MaterialPanel(new Materials ("male2", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, multiItemsPanel.getWidth(), multiItemsPanel.getHeight());
-        mp2.setPreferredSize(new Dimension(480, getHeight() / 6));
-        MaterialPanel mp3 = new MaterialPanel(new Materials ("male3", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, multiItemsPanel.getWidth(), multiItemsPanel.getHeight());
-        mp3.setPreferredSize(new Dimension(480, getHeight() / 6));
-        MaterialPanel mp4 = new MaterialPanel(new Materials ("male4", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, multiItemsPanel.getWidth(), multiItemsPanel.getHeight());
-        mp4.setPreferredSize(new Dimension(480, getHeight() / 6));
-        MaterialPanel mp5 = new MaterialPanel(new Materials ("male5", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, multiItemsPanel.getWidth(), multiItemsPanel.getHeight());
-        mp5.setPreferredSize(new Dimension(480, getHeight() / 6));
-        MaterialPanel mp6 = new MaterialPanel(new Materials ("female0", 10.50, 5, "Itchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, multiItemsPanel.getWidth(), multiItemsPanel.getHeight());
-        mp4.setPreferredSize(new Dimension(480, getHeight() / 6));
-        MaterialPanel mp7 = new MaterialPanel(new Materials ("female1", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "This is a tes of how much description I cam get into this beast with out causing appearance issues and making it look bad!!!"), true, scrollPanelView.getWidth(), scrollPanelView.getHeight());
-        mp5.setPreferredSize(new Dimension(480, getHeight() / 6));
-/*
-        GridBagConstraints c = new GridBagConstraints();
-
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.weighty = 1;
-        c.weightx = 1;
-        c.anchor = GridBagConstraints.NORTHWEST;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(5, 4, 20, 0);
-
-
-        scrollPanelView.add (mp0, c);
-
-       ++c.gridy;
-        scrollPanelView.add (mp1, c);
-
-        ++c.gridy;
-        scrollPanelView.add (mp2, c);
-
-        ++c.gridy;
-        scrollPanelView.add (mp3, c);
-
-        ++c.gridy;
-        scrollPanelView.add (mp4, c);
-
-        ++c.gridy;
-        scrollPanelView.add (mp5, c);
-
-        scrollPanelView.add (mp0, c);
-
-        */
+        MaterialPanel mp0 = new MaterialPanel(new Materials ("male0", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true);
+        mp0.setPreferredSize(new Dimension(getWidth() / 3, getHeight() / 6));
+        MaterialPanel mp1 = new MaterialPanel(new Materials ("male1", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true);
+        mp1.setPreferredSize(new Dimension(getWidth() / 3, getHeight() / 6));
+        MaterialPanel mp2 = new MaterialPanel(new Materials ("male2", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true);
+        mp2.setPreferredSize(new Dimension(getWidth() / 3, getHeight() / 6));
+        MaterialPanel mp3 = new MaterialPanel(new Materials ("male3", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true);
+        mp3.setPreferredSize(new Dimension(getWidth() / 3, getHeight() / 6));
+        MaterialPanel mp4 = new MaterialPanel(new Materials ("male4", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true);
+        mp4.setPreferredSize(new Dimension(getWidth() / 3, getHeight() / 6));
+        MaterialPanel mp5 = new MaterialPanel(new Materials ("male5", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true);
+        mp5.setPreferredSize(new Dimension(getWidth() / 3, getHeight() / 6));
+        MaterialPanel mp6 = new MaterialPanel(new Materials ("female0", 10.50, 5, "Itchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true);
+        mp4.setPreferredSize(new Dimension(getWidth() / 3, getHeight() / 6));
+        MaterialPanel mp7 = new MaterialPanel(new Materials ("female1", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "This is a tes of how much description I cam get into this beast with out causing appearance issues and making it look bad!!!"), true);
+        mp5.setPreferredSize(new Dimension(getWidth() / 3, getHeight() / 6));
 
         scrollPanelView.add (mp0);
         scrollPanelView.add (mp1);
@@ -223,17 +151,75 @@ public class Window extends JFrame{
         scrollPanelView.add (mp5);
         scrollPanelView.add (mp6);
         scrollPanelView.add (mp7);
-
-        singleItemTestPanel.add(new JButton("single"));
-
-
-
-
-    //    MaterialPanel matPan = new MaterialPanel(new Materials ("male0", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), true, desktop.getWidth()/ 3, desktop.getHeight() / 10);
-    //    matPan.setBounds(backGroundBoarderThickness, backGroundBoarderThickness, desktop.getWidth()/ 3, desktop.getHeight() / 10);
-    //    desktop.add(matPan);
-
     }
 
+    private void setUpSingleItemPanel (Container desktop) {
+        JScrollPane singleItemsPanel = new JScrollPane();
+        JPanel scrollPanelView = new JPanel();
+        scrollPanelView.setVisible(true);
+        singleItemsPanel.setVisible(true);
+        singleItemsPanel.setWheelScrollingEnabled(true);
+        singleItemsPanel.setViewportView(scrollPanelView);
+        singleItemsPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        singleItemsPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+        constraints.weightx = 0.66f;
+        constraints.weighty = 1f;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+
+        desktop.add(singleItemsPanel, constraints);
+
+        scrollPanelView.setLayout(new GridLayout(0, 1));
+
+        MaterialPanel mp0 = new MaterialPanel(new Materials ("male0", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), false);
+        mp0.setPreferredSize(new Dimension(2 * getWidth() / 3, (getHeight() / 2)));
+        MaterialPanel mp1 = new MaterialPanel(new Materials ("male1", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), false);
+        mp1.setPreferredSize(new Dimension(2 * getWidth() / 3, (getHeight() / 2)));
+        MaterialPanel mp2 = new MaterialPanel(new Materials ("male2", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), false);
+        mp2.setPreferredSize(new Dimension(2 * getWidth() / 3, (getHeight() / 2)));
+        MaterialPanel mp3 = new MaterialPanel(new Materials ("male3", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), false);
+        mp3.setPreferredSize(new Dimension(2 * getWidth() / 3, (getHeight() / 2)));
+        MaterialPanel mp4 = new MaterialPanel(new Materials ("male4", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), false);
+        mp4.setPreferredSize(new Dimension(2 * getWidth() / 3, (getHeight() / 2)));
+        MaterialPanel mp5 = new MaterialPanel(new Materials ("male5", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), false);
+        mp5.setPreferredSize(new Dimension(2 * getWidth() / 3, (getHeight() / 2)));
+        MaterialPanel mp6 = new MaterialPanel(new Materials ("female0", 10.50, 5, "Itchen.co", "Hot Shit", "resources/dontUse.png", "The best in the west"), false);
+        mp4.setPreferredSize(new Dimension(2 * getWidth() / 3, (getHeight() / 2)));
+        MaterialPanel mp7 = new MaterialPanel(new Materials ("female1", 10.50, 5, "bitchen.co", "Hot Shit", "resources/dontUse.png", "This is a tes of how much description I cam get into this beast with out causing appearance issues and making it look bad!!!"), false);
+        mp5.setPreferredSize(new Dimension(2 * getWidth() / 3, (getHeight() / 2)));
+
+        scrollPanelView.add (mp0);
+        scrollPanelView.add (mp1);
+        scrollPanelView.add (mp2);
+        scrollPanelView.add (mp3);
+        scrollPanelView.add (mp4);
+        scrollPanelView.add (mp5);
+        scrollPanelView.add (mp6);
+        scrollPanelView.add (mp7);
+    }
+
+    private void setUpOptionsPanel (Container desktop) {
+        JPanel placeHolder = new JPanel();
+        placeHolder.setVisible(true);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+        constraints.weightx = 0.66f;
+        constraints.weighty = 1f;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+
+        desktop.add(placeHolder, constraints);
+    }
 
 }

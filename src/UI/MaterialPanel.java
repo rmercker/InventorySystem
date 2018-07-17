@@ -12,19 +12,20 @@ public class MaterialPanel extends ItemPanel {
 
     private Materials material;
 
-    public MaterialPanel(Materials material, boolean small, int width, int height) {
-        super (material.getImageURL (), material.getDescription (), true, width, height);
+    public MaterialPanel(Materials material, boolean small) {
+        super (material.getImageURL (), material.getDescription (), small);
         this.material = material;
 
-        setUpMaterialDisplay (material, small, width, height);
+        setUpMaterialDisplay (material, small);
     }
 
-    private void setUpMaterialDisplay (Materials material, boolean small, int width, int height) {
+    private void setUpMaterialDisplay (Materials material, boolean small) {
         if (small) {
             setType(material.getType(),0, 5, 2, 1);
             setSupplier(material.getSupplier(), 1, 6, 2, 1);
         } else {
-            // TODO: add large panel display setup
+            setType(material.getType(),5, 5, 2, 1);
+            setSupplier(material.getSupplier(), 6, 6, 2, 1);
         }
     }
 
@@ -40,7 +41,7 @@ public class MaterialPanel extends ItemPanel {
         c.gridheight = height;
         c.weightx = 1f;
         c.weighty = 1f;
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.anchor = GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.HORIZONTAL;
 
         add (itemType, c);
@@ -58,7 +59,7 @@ public class MaterialPanel extends ItemPanel {
         c.gridheight = height;
         c.weightx = 1f;
         c.weighty = 1f;
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.anchor = GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.HORIZONTAL;
 
         add (itemSupplier, c);
