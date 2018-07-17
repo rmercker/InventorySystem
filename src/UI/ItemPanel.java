@@ -15,7 +15,7 @@ public abstract class ItemPanel extends JPanel {
 
     // TODO: add proper setting to make a viable panel;
     private final String defaultImageURL = "resources/defaultImage.png";
-    private final int smallImageFactor = 50, largeImageFactor = 100;
+    private final int smallImageFactor = 100, largeImageFactor = 100;
 
     protected ItemPanel (String imageURL, String description, boolean small, int width, int height) {
         setLayout(new GridBagLayout ());
@@ -28,12 +28,14 @@ public abstract class ItemPanel extends JPanel {
 
         GridBagConstraints c = new GridBagConstraints();
 
-        c.insets = new Insets(5, 5, 5, 10);
+        c.insets = new Insets(1, 5, 4, 5);
 
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 5;
         c.gridheight = 5;
+        c.weightx = 1f;
+        c.weighty = 1f;
         c.fill = GridBagConstraints.BOTH;
         c.anchor = GridBagConstraints.FIRST_LINE_START;
 
@@ -66,8 +68,13 @@ public abstract class ItemPanel extends JPanel {
         c.gridy = 0;
         c.gridwidth = 8;
         c.gridheight = 5;
+        c.insets = new Insets(15, 5, 4, 5);
 
-        JLabel descLabel = new JLabel(description);
+        JTextArea descLabel = new JTextArea(description);
+        descLabel.setLineWrap(true);
+        descLabel.setWrapStyleWord(true);
+        descLabel.setBackground(imageLabel.getBackground());
+        descLabel.setEditable(false);
         add(descLabel, c);
     }
 

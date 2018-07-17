@@ -33,11 +33,13 @@ public class MaterialPanel extends ItemPanel {
         itemType.setText("Type: " + type);
 
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(5, 5, 5, 10);
+        c.insets = new Insets(1, 5, 4, 5);
         c.gridx = x;
         c.gridy = y;
         c.gridwidth = width;
         c.gridheight = height;
+        c.weightx = 1f;
+        c.weighty = 1f;
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.fill = GridBagConstraints.HORIZONTAL;
 
@@ -49,11 +51,13 @@ public class MaterialPanel extends ItemPanel {
         itemSupplier.setText("Supplier: " + supplier);
 
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(5, 5, 5, 10);
+        c.insets = new Insets(1, 5, 4, 5);
         c.gridx = x;
         c.gridy = y;
         c.gridwidth = width;
         c.gridheight = height;
+        c.weightx = 1f;
+        c.weighty = 1f;
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.fill = GridBagConstraints.HORIZONTAL;
 
